@@ -1,19 +1,12 @@
 import React, { useState } from "react";
-import { PutObjectCommand, S3Client } from "@aws-sdk/client-s3";
+import { PutObjectCommand } from "@aws-sdk/client-s3";
+import { s3Client } from "../../../utils";
 
 import classes from "./form.module.css";
 
 export function UploadImage() {
   const [image, setImage] = useState(undefined);
   const [uploadingState, setUploadingState] = useState("");
-
-  const s3Client = new S3Client({
-    region: "eu-central-1",
-    credentials: {
-      accessKeyId: process.env.NEXT_PUBLIC_AWS_ACCESS_KEY_ID,
-      secretAccessKey: process.env.NEXT_PUBLIC_AWS_SECRET_KEY,
-    },
-  });
 
   function handleChange(e) {
     const files = e.currentTarget.files;
