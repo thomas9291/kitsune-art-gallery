@@ -15,7 +15,7 @@
   margin: 0.5rem;
   padding: 0.5rem;
   border-radius: 1rem;
-  box-shadow: 4px 4px 4px var(--blue-900);
+  box-shadow: 2px 2px 2px var(--blue-900);
   background: linear-gradient(var(--blue-200), var(--blue-100));
   color: var(--blue-900);
 }
