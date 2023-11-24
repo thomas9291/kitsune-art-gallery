@@ -7,6 +7,11 @@ import classes from "./form.module.css";
 export function UploadImage() {
   const [image, setImage] = useState(undefined);
   const [uploadingState, setUploadingState] = useState("");
+  const [isArt, setIsArt] = useState(false);
+
+  function handlerIsArt() {
+    setIsArt(!isArt);
+  }
 
   function handleChange(e) {
     const files = e.currentTarget.files;
@@ -57,25 +62,30 @@ export function UploadImage() {
 
   return (
     <div className={classes.container}>
-      <form
-        className={`flex flex-col border-solid border-2 border-white p-6`}
-        onSubmit={uploadImage}
-      >
-        Upload form
-        <input
-          className={`border-solid border-2 border-white my-2`}
-          type="file"
-          name="image"
-          onChange={handleChange}
-          accept="image/*"
-        />
-        <button
-          className={`border-solid border-2 border-white my-2`}
-          type="submit"
+      <button onClick={handlerIsArt} className={classes.btn}>
+        {isArt ? "Back" : "Add Art"}
+      </button>
+      {isArt && (
+        <form
+          className={`flex flex-col border-solid border-2 border-blue-400 p-6 rounded`}
+          onSubmit={uploadImage}
         >
-          upload
-        </button>
-      </form>
+          Upload form
+          <input
+            className={`border-solid border-2 border-blue-400 my-2 rounded p-1`}
+            type="file"
+            name="image"
+            onChange={handleChange}
+            accept="image/*"
+          />
+          <button
+            className={`border-solid border-2 border-blue-400 my-2 p-1 rounded`}
+            type="submit"
+          >
+            upload
+          </button>
+        </form>
+      )}
       <div>{uploadingState}</div>
     </div>
   );
