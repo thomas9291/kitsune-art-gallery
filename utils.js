@@ -1,5 +1,8 @@
 import { S3Client } from "@aws-sdk/client-s3";
 
+/* import { streamReader } from "@smithy/smithy-client";
+import sharp from "sharp"; */
+
 const s3Client = new S3Client({
   region: "eu-central-1",
   credentials: {

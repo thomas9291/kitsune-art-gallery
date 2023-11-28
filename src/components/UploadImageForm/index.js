@@ -4,7 +4,7 @@ import { s3Client } from "../../../utils";
 
 import classes from "./form.module.css";
 
-export function UploadImage() {
+export function UploadImage({ artState }) {
   const [image, setImage] = useState(undefined);
   const [uploadingState, setUploadingState] = useState("");
   const [isArt, setIsArt] = useState(false);
@@ -47,6 +47,8 @@ export function UploadImage() {
       if (response) {
         if (response.$metadata.httpStatusCode === 200) {
           setUploadingState("Done.");
+          artState(image);
+
           setTimeout(() => {
             setUploadingState("");
           }, 1000);
@@ -61,32 +63,40 @@ export function UploadImage() {
   }
 
   return (
-    <div className={classes.container}>
-      <button onClick={handlerIsArt} className={classes.btn}>
-        {isArt ? "Back" : "Add Art"}
-      </button>
-      {isArt && (
-        <form
-          className={`flex flex-col border-solid border-2 border-blue-400 p-6 rounded`}
-          onSubmit={uploadImage}
-        >
-          Upload form
-          <input
-            className={`border-solid border-2 border-blue-400 my-2 rounded p-1`}
-            type="file"
-            name="image"
-            onChange={handleChange}
-            accept="image/*"
-          />
-          <button
-            className={`border-solid border-2 border-blue-400 my-2 p-1 rounded`}
-            type="submit"
-          >
-            upload
-          </button>
-        </form>
+    <>
+      {!isArt && (
+        <button onClick={handlerIsArt} className={classes.btn}>
+          Add Art
+        </button>
       )}
-      <div>{uploadingState}</div>
-    </div>
+
+      {isArt && (
+        <div className={classes.container}>
+          <button onClick={handlerIsArt} className={classes.btn}>
+            Back
+          </button>
+          <form
+            className={`flex flex-col border-solid border-2 border-blue-400 p-6 rounded`}
+            onSubmit={uploadImage}
+          >
+            Upload form
+            <input
+              className={`border-solid border-2 border-blue-400 my-2 rounded p-1`}
+              type="file"
+              name="image"
+              onChange={handleChange}
+              accept="image/*"
+            />
+            <button
+              className={`border-solid border-2 border-blue-400 my-2 p-1 rounded`}
+              type="submit"
+            >
+              upload
+            </button>
+          </form>
+          <div>{uploadingState}</div>
+        </div>
+      )}
+    </>
   );
 }

@@ -14,5 +14,5 @@ body {
   --blue-800: #1820bb;
   --blue-900: #1d2692;
   --blue-950: #111455;
-  background: var(--blue-50);
+  background: black;
 }
