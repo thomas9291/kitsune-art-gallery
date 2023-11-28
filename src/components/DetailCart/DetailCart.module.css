@@ -2,3 +2,18 @@
   width: auto;
   border-radius: 1rem;
 }
+.header {
+  color: var(--blue-400);
+}
+.containerHeader {
+  text-align: center;
+  margin: 1rem;
+}
+.btnContainer {
+  margin: 1rem;
+  display: flex;
+  flex-direction: column;
+}
+.btn {
+  text-align: center;
+}

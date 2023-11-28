@@ -17,8 +17,21 @@ export default function HomePage({ setArt, art }) {
   async function handlerArt(data) {
     setArt(data);
     const urlImage = `https://kitsune-gallery1234.s3.eu-central-1.amazonaws.com/${data.name}`;
-    console.log("url image: ", urlImage);
-    /* setImageName(urlImage); */
+    const artName = data.name
+      .replace(".jpg", "")
+      .replace("_", " ")
+      .toUpperCase();
+
+    const response = await fetch("/api/artData", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ url: urlImage, name: artName }),
+    });
+    if (response.ok) {
+      console.log("success data fetched!");
+    }
   }
 
   const swiperStyle = {
@@ -51,6 +64,7 @@ export default function HomePage({ setArt, art }) {
         >
           <SwiperSlide style={swiperStyle}>
             <DetailCart
+              nameArt="Name Of Art"
               src={
                 "https://kitsune-gallery1234.s3.eu-central-1.amazonaws.com/demon_boufon_vert.jpg"
               }
@@ -58,6 +72,7 @@ export default function HomePage({ setArt, art }) {
           </SwiperSlide>
           <SwiperSlide style={swiperStyle}>
             <DetailCart
+              nameArt="Name Of Art"
               src={
                 "https://kitsune-gallery1234.s3.eu-central-1.amazonaws.com/demon_boufon_vert.jpg"
               }
