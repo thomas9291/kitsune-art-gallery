@@ -51,6 +51,7 @@ export function UploadImage({ artState }) {
 
           setTimeout(() => {
             setUploadingState("");
+            handlerIsArt();
           }, 1000);
         } else {
           setUploadingState(`Upload failed!`);
