@@ -13,6 +13,7 @@
     "@aws-sdk/client-dynamodb": "^3.460.0",
     "@aws-sdk/client-s3": "^3.456.0",
     "@aws-sdk/credential-providers": "^3.454.0",
+    "@aws-sdk/util-dynamodb": "^3.461.0",
     "@smithy/smithy-client": "^2.1.16",
     "dotenv": "^16.3.1",
     "next": "14.0.3",
@@ -21,6 +22,7 @@
     "sharp": "^0.32.6",
     "stream": "^0.0.2",
     "swiper": "^11.0.5",
+    "swr": "^2.2.4",
     "uuid": "^9.0.1"
   },
   "devDependencies": {
