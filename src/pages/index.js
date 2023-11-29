@@ -1,5 +1,6 @@
 import useSWR from "swr";
 import React, { useState } from "react";
+import Link from "next/link";
 
 import { UploadImage } from "../components/UploadImageForm";
 import LoadingComponent from "../components/loadingComponent";
@@ -57,7 +58,13 @@ export default function HomePage() {
           {artData.map((item) => {
             return (
               <SwiperSlide style={swiperStyle} key={item.id}>
-                <DetailCart src={item.url} nameArt={item.name} />
+                <DetailCart
+                  src={item.url}
+                  nameArt={item.name}
+                  linkedId={
+                    <Link href={`/artDetail/${item.id}`}>Show Detail</Link>
+                  }
+                />
               </SwiperSlide>
             );
           })}

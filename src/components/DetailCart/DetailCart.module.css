@@ -10,10 +10,10 @@
   margin: 1rem;
 }
 .btnContainer {
-  margin: 1rem;
   display: flex;
   flex-direction: column;
 }
 .btn {
   text-align: center;
+  color: var(--blue-500);
 }
