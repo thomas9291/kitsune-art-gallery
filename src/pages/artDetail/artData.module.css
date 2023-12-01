@@ -1,0 +1,16 @@
+.containerForm {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin: 1rem;
+}
+
+@media screen and (max-width: 600px) {
+  .containerForm {
+    flex-direction: column;
+  }
+  .formItems {
+    display: flex;
+    flex-direction: column;
+  }
+}
