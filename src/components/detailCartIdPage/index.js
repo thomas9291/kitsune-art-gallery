@@ -1,11 +1,10 @@
-import Image from "next/image";
 import React from "react";
-import classes from "./DetailCart.module.css";
+import classes from "./detailCartIdPage.module.css";
 
-function DetailCart(props) {
+export const DetailCartIdPage = (props) => {
   return (
-    <div className={classes.container}>
-      <div className={classes.btnContainer}>
+    <div>
+      <div>
         <button className={classes.btn}>{props.linkedId}</button>
       </div>
       <div className={classes.containerHeader}>
@@ -16,5 +15,4 @@ function DetailCart(props) {
       </div>
     </div>
   );
-}
-export default DetailCart;
+};

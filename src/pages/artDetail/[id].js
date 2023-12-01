@@ -1,17 +1,37 @@
-import React from "react";
+import React, { useState } from "react";
 import { useRouter } from "next/router";
 import useSWR from "swr";
-import DetailCart from "../../components/DetailCart";
+/* import DetailCart from "../../components/DetailCart"; */
 import LoadingComponent from "../../components/loadingComponent";
+import { CommentForm } from "@/components/commentForm";
 import Link from "next/link";
 import { s3Client } from "../../../utils";
 import { DeleteObjectCommand } from "@aws-sdk/client-s3";
+import classes from "./artData.module.css";
+import { DetailCartIdPage } from "../../components/detailCartIdPage";
 
 export default function DetailPage() {
   const router = useRouter();
+  const [comment, setComment] = useState(false);
   const { id } = router.query;
   const { data: artDetail, isLoading } = useSWR(`/api/artData/${id}`);
-
+  console.log("art detail from detail page: ", artDetail);
+  async function handlerComment(comment) {
+    try {
+      const response = await fetch(`/api/comment/${id}`, {
+        method: "PUT",
+        body: JSON.stringify(comment),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      if (response.ok) {
+        setComment(true);
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  }
   async function handlerDeleteArt(id) {
     const command = new DeleteObjectCommand({
       Bucket: process.env.NEXT_PUBLIC_AWS_BUCKET_NAME,
@@ -50,13 +70,21 @@ export default function DetailPage() {
           Delete Art
         </button>
       </div>
-      <DetailCart
-        nameArt={artDetail.name
-          .replaceAll("_", " ")
-          .replace(".jpg", "")
-          .toUpperCase()}
-        src={artDetail.url}
-      />
+      <div className={classes.containerForm}>
+        <div className={classes.detailCartContainer}>
+          <DetailCartIdPage
+            nameArt={artDetail.name
+              .replaceAll("_", " ")
+              .replace(".jpg", "")
+              .toUpperCase()}
+            src={artDetail.url}
+          />
+        </div>
+        <div className={classes.formItems}>
+          <CommentForm onSubmit={handlerComment} />
+        </div>
+      </div>
+      {comment ? <p>{artDetail.comments}</p> : "waiting for comment"}
     </div>
   );
 }

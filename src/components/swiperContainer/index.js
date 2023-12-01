@@ -1,9 +1,9 @@
-import "../../styles/swiper.module.css";
-
 import { Swiper } from "swiper/react";
 import "swiper/css";
 import "swiper/css/effect-coverflow";
 import "swiper/css/pagination";
+
+import classes from "./swiperContainer.module.css";
 
 import { EffectCoverflow, Pagination } from "swiper/modules";
 
@@ -12,7 +12,7 @@ import React from "react";
 export const SwiperContainer = (props) => {
   return (
     <Swiper
-      className="swiper"
+      className={classes.swiperContainer}
       effect={"coverflow"}
       grabCursor={true}
       centeredSlides={true}
