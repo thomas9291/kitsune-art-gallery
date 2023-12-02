@@ -18,8 +18,8 @@ export default function DetailPage() {
   console.log("art detail from detail page: ", artDetail);
   async function handlerComment(comment) {
     try {
-      const response = await fetch(`/api/comment/${id}`, {
-        method: "PUT",
+      const response = await fetch(`/api/artData/${id}`, {
+        method: "Post",
         body: JSON.stringify(comment),
         headers: {
           "Content-Type": "application/json",

@@ -16,6 +16,7 @@ export default async function handler(req, res) {
   if (req.method === "POST") {
     const body = req.body;
     body.id = artId;
+    body.comments = [];
     const art = new kitsuneArt(body);
     try {
       await art.save();
