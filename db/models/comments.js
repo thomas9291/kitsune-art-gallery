@@ -1,5 +1,4 @@
 import dynamoose from "dynamoose";
-import kitsuneComment from "./comments";
 
 const ddb = new dynamoose.aws.ddb.DynamoDB({
   credentials: {
@@ -11,17 +10,14 @@ const ddb = new dynamoose.aws.ddb.DynamoDB({
 
 dynamoose.aws.ddb.set(ddb);
 
-const kitsuneArtSchema = new dynamoose.Schema({
+const CommentKistuneSchema = new dynamoose.Schema({
   id: {
     type: String,
   },
-  name: { type: String },
-  url: { type: String },
-  comments: {
-    type: Array,
-    schema: [kitsuneComment],
-  },
+  artId: { type: String },
+  comment: { type: String },
 });
 
-const kitsuneArt = dynamoose.model("kitsuneArt", kitsuneArtSchema);
-export default kitsuneArt;
+const kitstuneComment = dynamoose.model("kitsuneComment", CommentKistuneSchema);
+
+export default kitstuneComment;
