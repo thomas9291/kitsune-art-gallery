@@ -1,0 +1,10 @@
+.container {
+  gap: 5px;
+  display: flex;
+  justify-content: center;
+  margin: 1rem;
+}
+.img {
+  display: block;
+  width: 24px;
+}

@@ -9,6 +9,10 @@ import { s3Client } from "../../../utils";
 import { DeleteObjectCommand } from "@aws-sdk/client-s3";
 import classes from "./artData.module.css";
 import { DetailCartIdPage } from "../../components/detailCartIdPage";
+import StartRating from "../../components/stars";
+import { CommentCart } from "../../components/commentCart";
+import { SwiperSlide } from "swiper/react";
+import { CubeSwiper } from "@/components/cubeSwiper";
 
 export default function DetailPage() {
   const router = useRouter();
@@ -81,10 +85,29 @@ export default function DetailPage() {
           />
         </div>
         <div className={classes.formItems}>
+          <div className={classes.stars}>
+            <StartRating />
+          </div>
           <CommentForm onSubmit={handlerComment} />
+          <div className={classes.commentsContainer}>
+            {artDetail.comments.length === 0 ? (
+              <p className="text-white">waiting for comment</p>
+            ) : (
+              <div className="w-64 text-sky-200 bg-sky-700 p-1 rounded">
+                <CubeSwiper>
+                  {artDetail.comments.map((item, index) => {
+                    return (
+                      <SwiperSlide key={index}>
+                        <CommentCart commentsItems={item.comment} />
+                      </SwiperSlide>
+                    );
+                  })}
+                </CubeSwiper>
+              </div>
+            )}
+          </div>
         </div>
       </div>
-      {comment ? <p>{artDetail.comments}</p> : "waiting for comment"}
     </div>
   );
 }
