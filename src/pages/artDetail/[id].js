@@ -18,16 +18,9 @@ export default function DetailPage() {
   const router = useRouter();
   const { id } = router.query;
   const [ratingLocalStorage, setStarsRatingLocalStorage] = useLocalStorageState(
-    "stars-rating",
-    0
+    id,
+    { defaultValue: 0 }
   );
-  useEffect(() => {
-    // You can perform any additional actions when the filledStars state changes
-    console.log(
-      "filled start from useEffect component stars: ",
-      ratingLocalStorage
-    );
-  }, [ratingLocalStorage]);
 
   const [comment, setComment] = useState(false);
   const { data: artDetail, isLoading } = useSWR(`/api/artData/${id}`);
@@ -100,8 +93,9 @@ export default function DetailPage() {
         <div className={classes.formItems}>
           <div className={classes.stars}>
             <StartRating
-              ratingLocalStorage={ratingLocalStorage}
+              id={id}
               setStarsRatingLocalStorage={setStarsRatingLocalStorage}
+              ratingLocalStorage={ratingLocalStorage}
             />
           </div>
           <CommentForm onSubmit={handlerComment} />
