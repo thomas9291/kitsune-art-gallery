@@ -11,7 +11,8 @@ export default async function handler(req, res) {
   if (req.method === "GET") {
     try {
       const artItem = await Art.get(id);
-      return res.status(200).json(artItem);
+      const populateArtItem = await artItem.populate();
+      return res.status(200).json(populateArtItem);
     } catch (error) {
       console.error(error);
     }

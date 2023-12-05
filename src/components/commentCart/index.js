@@ -4,7 +4,7 @@ import classes from "./commentCart.module.css";
 export const CommentCart = (props) => {
   return (
     <div className={classes.container}>
-      <p>{props.commentsItems}</p>
+      <p className={classes.comment}>{props.commentsItems}</p>
     </div>
   );
 };
