@@ -1,7 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import useSWR from "swr";
-/* import DetailCart from "../../components/DetailCart"; */
 import LoadingComponent from "../../components/loadingComponent";
 import { CommentForm } from "@/components/commentForm";
 import Link from "next/link";
@@ -13,13 +12,26 @@ import StartRating from "../../components/stars";
 import { CommentCart } from "../../components/commentCart";
 import { SwiperSlide } from "swiper/react";
 import { CubeSwiper } from "@/components/cubeSwiper";
+import useLocalStorageState from "use-local-storage-state";
 
 export default function DetailPage() {
   const router = useRouter();
-  const [comment, setComment] = useState(false);
   const { id } = router.query;
+  const [ratingLocalStorage, setStarsRatingLocalStorage] = useLocalStorageState(
+    "stars-rating",
+    0
+  );
+  useEffect(() => {
+    // You can perform any additional actions when the filledStars state changes
+    console.log(
+      "filled start from useEffect component stars: ",
+      ratingLocalStorage
+    );
+  }, [ratingLocalStorage]);
+
+  const [comment, setComment] = useState(false);
   const { data: artDetail, isLoading } = useSWR(`/api/artData/${id}`);
-  console.log("art detail from detail page: ", artDetail);
+
   async function handlerComment(comment) {
     try {
       const response = await fetch(`/api/artData/${id}`, {
@@ -64,6 +76,7 @@ export default function DetailPage() {
     borderRadius: "5px",
     marginTop: "20px",
   };
+
   return (
     <div className="flex flex-col items-center m-2">
       <Link href={"/"} className="text-sky-400/50">
@@ -86,7 +99,10 @@ export default function DetailPage() {
         </div>
         <div className={classes.formItems}>
           <div className={classes.stars}>
-            <StartRating />
+            <StartRating
+              ratingLocalStorage={ratingLocalStorage}
+              setStarsRatingLocalStorage={setStarsRatingLocalStorage}
+            />
           </div>
           <CommentForm onSubmit={handlerComment} />
           <div className={classes.commentsContainer}>
