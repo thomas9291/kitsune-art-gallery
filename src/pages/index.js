@@ -39,7 +39,7 @@ export default function HomePage() {
   }
 
   const swiperStyle = {
-    width: "30%",
+    width: "350px",
   };
   if (isLoading) {
     return <LoadingComponent />;
