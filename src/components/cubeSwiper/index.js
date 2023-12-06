@@ -10,7 +10,7 @@ import "swiper/css/pagination";
 // import required modules
 import { EffectCube, Pagination } from "swiper/modules";
 
-import classes from "./CubeSwiper.module.css";
+import classes from "./cubeSwiper.module.css";
 
 export const CubeSwiper = (props) => {
   return (
