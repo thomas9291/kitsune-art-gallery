@@ -23,11 +23,9 @@ export default async function handler(req, res) {
     newComment.id = commentId;
     newComment.comment = comment;
     newComment.artId = id;
-    console.log("new comment from post id api :", newComment);
     const artItem = await Art.get(id);
     try {
       artItem.comments.push(newComment);
-      console.log("artItem from post api :", artItem);
       await Promise.all([newComment.save(), artItem.save()]);
       return res.status(200).json({ status: "Input created" });
     } catch (error) {

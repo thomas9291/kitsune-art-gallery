@@ -36,6 +36,7 @@ export default function DetailPage() {
       });
       if (response.ok) {
         setComment(true);
+        router.reload();
       }
     } catch (error) {
       console.error(error);
@@ -103,7 +104,7 @@ export default function DetailPage() {
             {artDetail.comments.length === 0 ? (
               <p className="text-white">waiting for comment</p>
             ) : (
-              <div className="w-64 text-sky-200 bg-sky-700 p-1 rounded">
+              <div className="w-64 text-[#bfdbfe] bg-[#172554] p-1 rounded">
                 <CubeSwiper>
                   {artDetail.comments.map((item, index) => {
                     return (

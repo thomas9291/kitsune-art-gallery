@@ -34,7 +34,6 @@ export default function HomePage() {
       body: JSON.stringify({ url: urlImage, name: data.name }),
     });
     if (response.ok) {
-      console.log("success data fetched!");
       router.reload();
     }
   }
