@@ -16,3 +16,6 @@ body {
   --blue-950: #111455;
   background: black;
 }
+.swiperStyle {
+  width: 80%;
+}

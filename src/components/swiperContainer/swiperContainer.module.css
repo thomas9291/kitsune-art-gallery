@@ -1,3 +1,11 @@
 .swiperContainer {
   width: 100%;
 }
+.swiperSlide {
+  width: 30%;
+}
+@media screen and (max-width: 800px) {
+  .swiperSlide {
+    width: 10%;
+  }
+}
