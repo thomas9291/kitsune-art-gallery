@@ -10,6 +10,7 @@ import { SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/effect-coverflow";
 import "swiper/css/pagination";
+import classes from "../components/swiperContainer/swiperContainer.module.css";
 
 import DetailCart from "../components/DetailCart";
 
@@ -37,10 +38,6 @@ export default function HomePage() {
       router.reload();
     }
   }
-
-  const swiperStyle = {
-    width: "350px",
-  };
   if (isLoading) {
     return <LoadingComponent />;
   }
@@ -62,7 +59,7 @@ export default function HomePage() {
           <SwiperContainer>
             {artData.map((item) => {
               return (
-                <SwiperSlide style={swiperStyle} key={item.id}>
+                <SwiperSlide className={classes.swiperSlide} key={item.id}>
                   <DetailCart
                     src={item.url}
                     nameArt={item.name
