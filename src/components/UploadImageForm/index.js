@@ -29,6 +29,7 @@ export function UploadImage({ artState }) {
 
     const file = new FormData(e.target);
     const obj = Object.fromEntries(file);
+    console.log("obj from form: ", obj);
     file.append("image", image);
     const command = new PutObjectCommand({
       Bucket: "kitsune-gallery1234",

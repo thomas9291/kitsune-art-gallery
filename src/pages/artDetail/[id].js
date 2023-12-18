@@ -23,6 +23,7 @@ export default function DetailPage() {
   );
 
   const [comment, setComment] = useState(false);
+
   const { data: artDetail, isLoading } = useSWR(`/api/artData/${id}`);
 
   async function handlerComment(comment) {
@@ -43,9 +44,12 @@ export default function DetailPage() {
     }
   }
   async function handlerDeleteArt(id) {
+    const imageUrl = artDetail.url;
+    const urlSplit = imageUrl.split("/");
+    const nameImage = urlSplit[urlSplit.length - 1];
     const command = new DeleteObjectCommand({
       Bucket: process.env.NEXT_PUBLIC_AWS_BUCKET_NAME,
-      Key: artDetail.name,
+      Key: nameImage,
     });
     if (confirm("are you sure you want to delete?")) {
       try {

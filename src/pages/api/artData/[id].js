@@ -36,10 +36,17 @@ export default async function handler(req, res) {
   if (req.method === "DELETE") {
     try {
       const artItem = await Art.get(id);
-      const commentsItems = await kitsuneComment.filter("id");
-      await commentsItems.delete();
-      await artItem.delete();
-      return res.status(200).json("success deleted");
+      if (artItem.comments.length === 0) {
+        await artItem.delete();
+        return res.status(200).json("success deleted");
+      } else {
+        const comment = await kitsuneComment.scan({ artId: id }).exec();
+        comment.map(async (item) => {
+          await item.delete();
+          return res.status(200).json("success deleted");
+        });
+        await artItem.delete();
+      }
     } catch (error) {
       console.log(error);
     }
