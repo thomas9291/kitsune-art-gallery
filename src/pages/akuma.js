@@ -1,7 +1,6 @@
 import useSWR from "swr";
-import React, { useState } from "react";
+import React from "react";
 import Link from "next/link";
-import { useRouter } from "next/router";
 
 import { UploadImage } from "../components/UploadImageForm";
 import LoadingComponent from "../components/loadingComponent";
@@ -17,40 +16,20 @@ import { FilterDropDown } from "../components/filterDropdown";
 
 import { SwiperContainer } from "../components/swiperContainer";
 
-export default function HomePage() {
-  const router = useRouter();
-  const [art, setArt] = useState("");
+export default function Akuma() {
   const { data: artData, isLoading } = useSWR("/api/artData", {
     fallbackData: [],
   });
+  const akumaData = artData.filter((element) => element.category === "Akuma");
+  console.log("akuma data filter from akuma page: ", akumaData);
 
-  async function handlerArt(data) {
-    setArt(data);
-    console.log("data from home page: ", data);
-    const urlImage = `https://kitsune-gallery1234.s3.eu-central-1.amazonaws.com/${data.image.name}`;
-
-    const response = await fetch("/api/artData", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        url: urlImage,
-        name: data.name,
-        category: data.category,
-      }),
-    });
-    if (response.ok) {
-      router.reload();
-    }
-  }
   if (isLoading) {
     return <LoadingComponent />;
   }
-  if (artData.length === 0) {
+  if (akumaData.length === 0) {
     return (
       <div className="m-4 text-center">
-        <UploadImage artState={handlerArt} />
+        <h1>waiting for Akuma</h1>
       </div>
     );
   }
@@ -59,16 +38,13 @@ export default function HomePage() {
     <div className="flex flex-col items-center relative m-5">
       <div className="app">
         <div className="m-4  flex justify-center items-center">
-          <div>
-            <UploadImage artState={handlerArt} />
-          </div>
           <div className="w-52">
             <FilterDropDown />
           </div>
         </div>
         <div className=" m-5 flex flex-col ">
           <SwiperContainer>
-            {artData.map((item) => {
+            {akumaData.map((item) => {
               return (
                 <SwiperSlide className={classes.swiperSlide} key={item.id}>
                   <DetailCart
