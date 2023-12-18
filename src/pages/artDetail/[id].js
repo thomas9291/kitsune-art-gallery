@@ -84,10 +84,7 @@ export default function DetailPage() {
       <div className={classes.containerForm}>
         <div className={classes.detailCartContainer}>
           <DetailCartIdPage
-            nameArt={artDetail.name
-              .replaceAll("_", " ")
-              .replace(".jpg", "")
-              .toUpperCase()}
+            nameArt={artDetail.name.toUpperCase()}
             src={artDetail.url}
           />
         </div>

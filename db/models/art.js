@@ -17,6 +17,7 @@ const kitsuneArtSchema = new dynamoose.Schema({
   },
   name: { type: String },
   url: { type: String },
+  category: { type: String },
   comments: {
     type: Array,
     schema: [kitsuneComment],

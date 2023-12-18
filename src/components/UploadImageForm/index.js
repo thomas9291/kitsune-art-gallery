@@ -27,9 +27,9 @@ export function UploadImage({ artState }) {
       return;
     }
 
-    const file = new FormData();
+    const file = new FormData(e.target);
+    const obj = Object.fromEntries(file);
     file.append("image", image);
-
     const command = new PutObjectCommand({
       Bucket: "kitsune-gallery1234",
       Key: image.name,
@@ -47,7 +47,7 @@ export function UploadImage({ artState }) {
       if (response) {
         if (response.$metadata.httpStatusCode === 200) {
           setUploadingState("Done.");
-          artState(image);
+          artState(obj);
 
           setTimeout(() => {
             setUploadingState("");
@@ -88,6 +88,25 @@ export function UploadImage({ artState }) {
               onChange={handleChange}
               accept="image/*"
             />
+            <input
+              className={`border-solid border-2 border-blue-400 my-2 rounded p-1`}
+              type="text"
+              name="name"
+              placeholder="write the art name
+              "
+              required
+            />
+            <div>
+              <select name="category" id="category">
+                <option value="">--choose a category--</option>
+                <option value="Akuma">Akuma</option>
+                <option value="Bijutsu">Bijustu</option>
+                <option value="Bushi">Bushi</option>
+                <option value="Heiki">Heiki</option>
+                <option value="Herumetto">Herumetto</option>
+                required
+              </select>
+            </div>
             <button
               className={`border-solid border-2 border-blue-400 my-2 p-1 rounded`}
               type="submit"

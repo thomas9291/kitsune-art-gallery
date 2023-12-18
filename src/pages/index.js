@@ -25,14 +25,19 @@ export default function HomePage() {
 
   async function handlerArt(data) {
     setArt(data);
-    const urlImage = `https://kitsune-gallery1234.s3.eu-central-1.amazonaws.com/${data.name}`;
+    console.log("data from home page: ", data);
+    const urlImage = `https://kitsune-gallery1234.s3.eu-central-1.amazonaws.com/${data.image.name}`;
 
     const response = await fetch("/api/artData", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ url: urlImage, name: data.name }),
+      body: JSON.stringify({
+        url: urlImage,
+        name: data.name,
+        category: data.category,
+      }),
     });
     if (response.ok) {
       router.reload();
@@ -62,10 +67,7 @@ export default function HomePage() {
                 <SwiperSlide className={classes.swiperSlide} key={item.id}>
                   <DetailCart
                     src={item.url}
-                    nameArt={item.name
-                      .replaceAll("_", " ")
-                      .replace(".jpg", "")
-                      .toUpperCase()}
+                    nameArt={item.name.toUpperCase()}
                     linkedId={
                       <Link href={`/artDetail/${item.id}`}>Show Detail</Link>
                     }
