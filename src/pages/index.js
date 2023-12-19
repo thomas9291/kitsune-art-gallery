@@ -13,7 +13,6 @@ import "swiper/css/pagination";
 import classes from "../components/swiperContainer/swiperContainer.module.css";
 
 import DetailCart from "../components/DetailCart";
-import { FilterDropDown } from "../components/filterDropdown";
 
 import { SwiperContainer } from "../components/swiperContainer";
 
@@ -23,6 +22,27 @@ export default function HomePage() {
   const { data: artData, isLoading } = useSWR("/api/artData", {
     fallbackData: [],
   });
+
+  const galleryArray = [];
+  const akumaDemo = artData.find((element) => element.name === "bouffon vert");
+  const bijutsuDemo = artData.find((element) => element.name === "dragon");
+  const heikiDemo = artData.find(
+    (element) => element.name === "lance et tanto"
+  );
+  const herumettoDemo = artData.find(
+    (element) => element.name === "demon face"
+  );
+  const bushiDemo = artData.find(
+    (element) => element.name === "armure dragon d´or"
+  );
+  galleryArray.push(
+    akumaDemo,
+    bijutsuDemo,
+    heikiDemo,
+    herumettoDemo,
+    bushiDemo
+  );
+  console.log("galleryArray from home page: ", galleryArray);
 
   async function handlerArt(data) {
     setArt(data);
@@ -47,7 +67,7 @@ export default function HomePage() {
   if (isLoading) {
     return <LoadingComponent />;
   }
-  if (artData.length === 0) {
+  if (galleryArray.length === 0) {
     return (
       <div className="m-4 text-center">
         <UploadImage artState={handlerArt} />
@@ -62,20 +82,22 @@ export default function HomePage() {
           <div>
             <UploadImage artState={handlerArt} />
           </div>
-          <div className="w-52">
-            <FilterDropDown />
-          </div>
         </div>
+        <h1 className="text-white text-center font-serif">
+          Please select a gallery
+        </h1>
         <div className=" m-5 flex flex-col ">
           <SwiperContainer>
-            {artData.map((item) => {
+            {galleryArray.map((item) => {
               return (
                 <SwiperSlide className={classes.swiperSlide} key={item.id}>
                   <DetailCart
                     src={item.url}
-                    nameArt={item.name.toUpperCase()}
+                    nameArt={item.category.toUpperCase()}
                     linkedId={
-                      <Link href={`/artDetail/${item.id}`}>Show Detail</Link>
+                      <Link href={`/${item.category.toLowerCase()}`}>
+                        Show category
+                      </Link>
                     }
                   />
                 </SwiperSlide>
