@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import filledStarsSvg from "../../../public/star-filled.svg";
 import emptyStarsSvg from "../../../public/star-empty.svg";
 import classes from "./starts.module.css";
