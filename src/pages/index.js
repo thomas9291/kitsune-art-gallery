@@ -13,6 +13,7 @@ import "swiper/css/pagination";
 import classes from "../components/swiperContainer/swiperContainer.module.css";
 
 import DetailCart from "../components/DetailCart";
+import LogoImage from "../components/logoImage";
 
 import { SwiperContainer } from "../components/swiperContainer";
 
@@ -78,7 +79,10 @@ export default function HomePage() {
   return (
     <div className="flex flex-col items-center relative m-5">
       <div className="app">
-        <div className="m-4  flex justify-center items-center">
+        <div className="m-4  flex justify-evenly items-center">
+          <div>
+            <LogoImage />
+          </div>
           <div>
             <UploadImage artState={handlerArt} />
           </div>
@@ -96,7 +100,7 @@ export default function HomePage() {
                     nameArt={item.category.toUpperCase()}
                     linkedId={
                       <Link href={`/${item.category.toLowerCase()}`}>
-                        Show category
+                        Show Gallery
                       </Link>
                     }
                   />
