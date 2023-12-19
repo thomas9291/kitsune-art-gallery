@@ -2,7 +2,6 @@ import useSWR from "swr";
 import React from "react";
 import Link from "next/link";
 
-import { UploadImage } from "../components/UploadImageForm";
 import LoadingComponent from "../components/loadingComponent";
 
 import { SwiperSlide } from "swiper/react";
