@@ -47,7 +47,7 @@ export default function HomePage() {
 
   async function handlerArt(data) {
     setArt(data);
-    console.log("data from home page: ", data);
+
     const urlImage = `https://kitsune-gallery1234.s3.eu-central-1.amazonaws.com/${data.image.name}`;
 
     const response = await fetch("/api/artData", {
@@ -79,7 +79,7 @@ export default function HomePage() {
   return (
     <div className="flex flex-col items-center relative m-5">
       <div className="app">
-        <div className="m-4  flex justify-evenly items-center">
+        <div className="m-4  flex flex-col md:flex-row justify-evenly items-center">
           <div>
             <LogoImage />
           </div>
@@ -87,9 +87,7 @@ export default function HomePage() {
             <UploadImage artState={handlerArt} />
           </div>
         </div>
-        <h1 className="text-white text-center font-serif">
-          Please select a gallery
-        </h1>
+
         <div className=" m-5 flex flex-col ">
           <SwiperContainer>
             {galleryArray.map((item) => {

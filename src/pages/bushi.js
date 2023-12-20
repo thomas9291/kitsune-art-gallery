@@ -36,7 +36,7 @@ export default function Bushi() {
   return (
     <div className="flex flex-col items-center relative m-5">
       <div className="app">
-        <div className="m-4  flex justify-evenly items-center">
+        <div className="m-4  flex flex-col md:flex-row justify-evenly items-center">
           <div>
             <LogoImage />
           </div>
